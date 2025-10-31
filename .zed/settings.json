@@ -1,0 +1,15 @@
+{
+  // Configure CSS language server to ignore unknown at-rules
+  // This fixes warnings for Tailwind CSS v4 @theme directive
+  "lsp": {
+    "vscode-css-language-server": {
+      "settings": {
+        "css": {
+          "lint": {
+            "unknownAtRules": "ignore"
+          }
+        }
+      }
+    }
+  }
+}
