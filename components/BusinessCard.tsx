@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTransitionRouter } from "next-view-transitions";
 import {
     loadImageCached,
     renderCardstockTexture,
@@ -46,9 +47,62 @@ interface BusinessCardProps {
     diffuseLight?: number;
 
     /**
+     * Text scale factor (multiplier for all text sizes)
+     * @default 1.0
+     */
+    textScaleFactor?: number;
+
+    /**
      * Additional CSS classes
      */
     className?: string;
+
+    // Text content
+    /**
+     * Name to display (centered, large)
+     * @default "TEJ CHHABRA"
+     */
+    name?: string;
+
+    /**
+     * Subtitle/job title (centered, below name)
+     * @default "ASSOCIATE STRATEGY CONSULTANT"
+     */
+    subtitle?: string;
+
+    /**
+     * Email address (bottom left, clickable)
+     * @default "contact@tejchhabra.com"
+     */
+    email?: string;
+
+    /**
+     * Phone number (bottom left)
+     * @default "617 314 1535"
+     */
+    phone?: string;
+
+    /**
+     * Company name (bottom right, clickable)
+     * @default "Mars & Co."
+     */
+    company?: string;
+
+    /**
+     * Company website URL
+     * @default "https://www.marsandco.com/"
+     */
+    companyUrl?: string;
+
+    /**
+     * Optional text for top left corner
+     */
+    topLeft?: string;
+
+    /**
+     * Optional text for top right corner
+     */
+    topRight?: string;
 }
 
 /**
@@ -88,14 +142,35 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
  */
 export default function BusinessCard({
     normalMapUrl = DEFAULT_CONFIG.normalMapUrl,
-    baseColor = "#F7F5F0",
+    baseColor = "#FAF6F0",
     lightAngle = DEFAULT_CONFIG.lighting.angle,
     lightElevation = DEFAULT_CONFIG.lighting.elevation,
     ambientLight = DEFAULT_CONFIG.lighting.ambient,
     diffuseLight = DEFAULT_CONFIG.lighting.diffuse,
+    textScaleFactor = 1.3,
     className = "",
+    name = "TEJ CHHABRA",
+    subtitle = "associate strategy consultant",
+    email = "contact@tejchhabra.com",
+    phone = "617 314 1535",
+    company = "Mars & Co .",
+    companyUrl = "https://www.marsandco.com/",
+    topLeft,
+    topRight,
 }: BusinessCardProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isNavigating, setIsNavigating] = useState(false);
+    const router = useTransitionRouter();
+
+    const handleNavigation = (href: string) => (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsNavigating(true);
+
+        // Wait for slide-out animation to complete
+        setTimeout(() => {
+            router.push(href);
+        }, 500); // Match animation duration
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -131,16 +206,159 @@ export default function BusinessCard({
     ]);
 
     return (
-        <div
-            className={`w-full max-w-[700px] mx-auto shadow-[2px_3px_4px_rgba(0,0,0,0.4)] ${className}`}
-        >
-            <canvas
-                ref={canvasRef}
-                className="w-full h-auto block"
+        <>
+            <style>{`
+                @keyframes slideOutLeft {
+                    to {
+                        transform: translateX(-120%);
+                        opacity: 0;
+                    }
+                }
+            `}</style>
+            <div
+                className={`relative w-full min-w-[280px] max-w-[700px] mx-auto shadow-[2px_3px_4px_rgba(0,0,0,0.4)] @container ${className}`}
                 style={{
-                    aspectRatio: "1.75",
+                    animation: isNavigating
+                        ? "slideOutLeft 0.5s cubic-bezier(0.4, 0, 1, 1) forwards"
+                        : undefined,
                 }}
-            />
-        </div>
+            >
+                {/* Text Layer (above canvas) */}
+                <div className="absolute inset-0 z-20">
+                    {/* Center text */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <h1
+                            className="font-serif tracking-wide pointer-events-auto select-text -mb-3"
+                            style={{
+                                fontSize: `${5 * textScaleFactor}cqw`,
+                                textShadow:
+                                    "-1px -1px 0px rgba(0, 0, 0, 0.1), 1px 1px 0px rgba(255, 255, 255, 0.5)",
+                            }}
+                        >
+                            {name}
+                        </h1>
+                        <p
+                            className="font-serif tracking-wider text-center pointer-events-auto select-text"
+                            style={{
+                                fontSize: `${3 * textScaleFactor}cqw`,
+                                textShadow:
+                                    "-1px -1px 0px rgba(0, 0, 0, 0.1), 1px 1px 0px rgba(255, 255, 255, 0.5)",
+                            }}
+                        >
+                            {subtitle}
+                        </p>
+                    </div>
+
+                    {/* Top left: Company */}
+                    <div
+                        className="absolute top-[5%] left-[5%] font-serif pointer-events-auto select-text"
+                        style={{
+                            fontSize: `max(14px, ${2 * textScaleFactor}cqw)`,
+                        }}
+                    >
+                        <a
+                            href={companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                            style={{ textDecoration: "none" }}
+                        >
+                            {company}
+                        </a>
+                    </div>
+
+                    {/* Top right: Email & Phone */}
+                    <div
+                        className="absolute top-[5%] right-[5%] font-serif leading-tight text-right pointer-events-auto select-text"
+                        style={{
+                            fontSize: `max(14px, ${2.25 * textScaleFactor}cqw)`,
+                        }}
+                    >
+                        <a
+                            href={`mailto:${email}`}
+                            className="block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                        >
+                            {email}
+                        </a>
+                        <p>{phone}</p>
+                    </div>
+
+                    {/* Mobile: Navigation links centered at bottom */}
+                    <div
+                        className="absolute bottom-[8%] left-1/2 -translate-x-1/2 font-serif leading-normal text-center pointer-events-auto select-text sm:hidden"
+                        style={{
+                            fontSize: `max(18px, ${4 * textScaleFactor}cqw)`,
+                        }}
+                    >
+                        <a
+                            href="/projects"
+                            onClick={handleNavigation("/projects")}
+                            className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                            style={{ textDecoration: "none" }}
+                        >
+                            Projects
+                        </a>
+                        <span className="mx-3">·</span>
+                        <a
+                            href="/about"
+                            onClick={handleNavigation("/about")}
+                            className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                            style={{ textDecoration: "none" }}
+                        >
+                            About
+                        </a>
+                    </div>
+
+                    {/* Desktop: Navigation links at bottom right */}
+                    <div
+                        className="hidden sm:block absolute bottom-[8%] right-[5%] font-serif leading-tight text-right pointer-events-auto select-text"
+                        style={{
+                            fontSize: `max(14px, ${2.25 * textScaleFactor}cqw)`,
+                        }}
+                    >
+                        <a
+                            href="/projects"
+                            onClick={handleNavigation("/projects")}
+                            className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                            style={{ textDecoration: "none" }}
+                        >
+                            Projects
+                        </a>
+                        <br />
+                        <a
+                            href="/about"
+                            onClick={handleNavigation("/about")}
+                            className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                            style={{ textDecoration: "none" }}
+                        >
+                            About
+                        </a>
+                    </div>
+
+                    {/* Optional: Top left corner */}
+                    {topLeft && (
+                        <div className="absolute top-[5%] left-[5%] text-[1vw] font-serif">
+                            {topLeft}
+                        </div>
+                    )}
+
+                    {/* Optional: Top right corner */}
+                    {topRight && (
+                        <div className="absolute top-[5%] right-[5%] text-[1vw] font-serif">
+                            {topRight}
+                        </div>
+                    )}
+                </div>
+
+                {/* Canvas (paper texture below text) */}
+                <canvas
+                    ref={canvasRef}
+                    className="relative w-full h-auto block pointer-events-none"
+                    style={{
+                        aspectRatio: "1.75",
+                    }}
+                />
+            </div>
+        </>
     );
 }
