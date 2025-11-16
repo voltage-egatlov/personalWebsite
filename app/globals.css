@@ -25,33 +25,3 @@ body {
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
 }
-
-/* View Transitions API - Simple Fade In */
-@supports (view-transition-name: none) {
-    /* No animation for old page - business card handles the exit */
-    ::view-transition-old(root) {
-        animation: none;
-    }
-
-    /* New page: simple fade in with delay */
-    ::view-transition-new(root) {
-        animation: fadeIn 0.3s ease-out 0.25s both;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-}
-
-/* Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-        animation: none;
-    }
-}

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,14 +37,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ViewTransitions>
-            <html lang="en">
-                <body
-                    className={`${geistSans.variable} ${geistMono.variable} ${garamondClassico.variable} antialiased`}
-                >
-                    {children}
-                </body>
-            </html>
-        </ViewTransitions>
+        <html lang="en">
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} ${garamondClassico.variable} antialiased`}
+            >
+                {children}
+            </body>
+        </html>
     );
 }
