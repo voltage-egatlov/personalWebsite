@@ -15,7 +15,7 @@ export default function ProjectFilter({
 
     return (
         <nav className="">
-            <div className="flex items-center gap-8 text-[1.1vw] tracking-wide">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[1.1vw] tracking-wide">
                 {allTags.map((tag, index) => {
                     const isActive =
                         tag === "All Projects"
@@ -24,7 +24,7 @@ export default function ProjectFilter({
                     const tagValue = tag === "All Projects" ? null : tag;
 
                     return (
-                        <div key={tag} className="flex items-center gap-8">
+                        <div key={tag} className="flex items-center gap-4">
                             <button
                                 onClick={() => onFilterChange(tagValue)}
                                 className={`transition-opacity duration-300 text-black ${

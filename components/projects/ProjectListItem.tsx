@@ -17,24 +17,27 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
             className="block group border-b border-black/20 first:pt-0 last:border-b-0 transition-all duration-300 hover:bg-black/5"
         >
             <div className="flex items-center gap-6">
-                {/* Title */}
-                <div className="w-[20%] shrink-0">
-                    <h2 className="text-[1.1vw] font-medium text-black truncate">
+                {/* Title - shows full text */}
+                <div className="shrink-0">
+                    <h2 className="text-[1.1vw] font-medium text-black whitespace-nowrap">
                         {project.title}
                     </h2>
                 </div>
 
-                {/* Description - scrolls on hover */}
-                <div className="flex-1 overflow-hidden relative">
-                    <div className="group-hover:animate-marquee whitespace-nowrap">
-                        <p className="text-[0.95vw] text-black/70 pr-8">
+                {/* Description - scrolls on hover, takes remaining space */}
+                <div className="flex-1 overflow-hidden relative min-w-0">
+                    <div className="inline-block animate-marquee whitespace-nowrap">
+                        <span className="text-[0.95vw] text-black/70 inline-block pr-10">
                             {project.description}
-                        </p>
+                        </span>
+                        <span className="text-[0.95vw] text-black/70 inline-block pr-10">
+                            {project.description}
+                        </span>
                     </div>
                 </div>
 
                 {/* Tags */}
-                <div className="text-[0.85vw] text-black/60 tracking-wider uppercase whitespace-nowrap">
+                <div className="text-[0.85vw] text-black/60 tracking-wider uppercase whitespace-nowrap italic shrink-0">
                     {project.tags.join(" · ")}
                 </div>
 

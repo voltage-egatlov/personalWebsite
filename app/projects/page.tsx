@@ -43,7 +43,7 @@ export default function ProjectsPage() {
         <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center font-sans">
             <div className="w-[50vw] min-w-[600px] max-w-[800px]">
                 {/* Header */}
-                <header className="mb-4">
+                <header className="">
                     <h1 className="text-[3vw] text-black">Projects</h1>
                 </header>
 
@@ -96,7 +96,13 @@ export default function ProjectsPage() {
                 }
 
                 .animate-marquee {
-                    animation: marquee 15s linear infinite;
+                    animation: none;
+                    transform: translateX(0);
+                    transition: transform 0.3s ease;
+                }
+
+                .group:hover .animate-marquee {
+                    animation: marquee 12s linear infinite;
                 }
 
                 @media (prefers-reduced-motion: reduce) {
