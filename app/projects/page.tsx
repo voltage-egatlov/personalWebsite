@@ -40,14 +40,14 @@ export default function ProjectsPage() {
     }
 
     return (
-        <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center font-sans">
-            <div className="w-[50vw] min-w-[600px] max-w-[800px]">
-                {/* Header */}
-                <header className="">
+        <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] font-sans py-36">
+            <div className="w-[50vw] min-w-[600px] max-w-[800px] mx-auto">
+                {/* Header - Fixed */}
+                <header className="mb-4">
                     <h1 className="text-[3vw] text-black">Projects</h1>
                 </header>
 
-                {/* Filter */}
+                {/* Filter - Fixed */}
                 <div className="mb-4">
                     <ProjectFilter
                         tags={tags}
@@ -56,8 +56,8 @@ export default function ProjectsPage() {
                     />
                 </div>
 
-                {/* Projects List */}
-                <div className="space-y-0">
+                {/* Projects List - Only this section changes */}
+                <div className="space-y-0 min-h-[400px]">
                     {filteredProjects.length > 0 ? (
                         filteredProjects.map((project) => (
                             <div key={project.slug}>
