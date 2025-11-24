@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import ProjectFilter from "@/components/projects/ProjectFilter";
 import ProjectFilterMobile from "@/components/projects/ProjectFilterMobile";
@@ -14,8 +14,6 @@ export default function ProjectsPage() {
     const [activeTag, setActiveTag] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
-    const [isScrollable, setIsScrollable] = useState(false);
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         fetch("/api/projects")
@@ -46,21 +44,6 @@ export default function ProjectsPage() {
         ? projects.filter((project) => project.tags.includes(activeTag))
         : projects;
 
-    // Check if projects list is scrollable
-    useEffect(() => {
-        const checkScrollable = () => {
-            if (scrollContainerRef.current) {
-                const { scrollHeight, clientHeight } =
-                    scrollContainerRef.current;
-                setIsScrollable(scrollHeight > clientHeight);
-            }
-        };
-
-        checkScrollable();
-        window.addEventListener("resize", checkScrollable);
-        return () => window.removeEventListener("resize", checkScrollable);
-    }, [filteredProjects, isMobile]);
-
     if (loading) {
         return (
             <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
@@ -76,13 +59,13 @@ export default function ProjectsPage() {
             className={`min-h-screen font-sans relative ${
                 isMobile
                     ? "bg-[#f4f3ee] py-6 overflow-x-hidden"
-                    : "bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] py-12"
+                    : "bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] py-12"
             }`}
         >
             {/* Business card - bottom right of page */}
             <Link
                 href="/"
-                className={`fixed bg-gradient-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 active:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black ${
+                className={`fixed bg-linear-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 active:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black ${
                     isMobile
                         ? "bottom-4 right-4 text-base"
                         : "bottom-8 right-8 text-xl"
@@ -135,7 +118,6 @@ export default function ProjectsPage() {
                 {/* Projects List - Only this section changes */}
                 <div className={`space-y-0 ${isMobile ? "relative" : ""}`}>
                     <div
-                        ref={scrollContainerRef}
                         className={`space-y-0 ${
                             isMobile
                                 ? "max-h-[75vh] overflow-y-auto scrollbar-visible"

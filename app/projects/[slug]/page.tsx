@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { Project } from "@/lib/projects/types";
 
@@ -51,7 +52,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
     if (loading) {
         return (
-            <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
+            <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
                 <div className="text-lg text-black">Loading project...</div>
             </main>
         );
@@ -59,7 +60,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
     if (error || !project) {
         return (
-            <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
+            <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
                 <div className="text-center">
                     <div className="text-lg text-black mb-4">
                         Project not found
@@ -87,13 +88,13 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             className={`min-h-screen font-sans relative ${
                 isMobile
                     ? "bg-[#f4f3ee] py-6 overflow-x-hidden"
-                    : "bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] py-12"
+                    : "bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] py-12"
             }`}
         >
             {/* Business card - bottom right of page */}
             <Link
                 href="/"
-                className={`fixed bg-gradient-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 active:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black ${
+                className={`fixed bg-linear-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 active:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black ${
                     isMobile
                         ? "bottom-4 right-4 text-base"
                         : "bottom-8 right-8 text-xl"
@@ -269,14 +270,22 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                             hr: () => (
                                 <hr className="border-0 border-t border-black/20 my-12" />
                             ),
-                            img: ({ src, alt }) => (
-                                <img
-                                    src={src}
-                                    alt={alt || ""}
-                                    className="w-full rounded my-6"
-                                    loading="lazy"
-                                />
-                            ),
+                            img: ({ src, alt }) => {
+                                const imageSrc =
+                                    typeof src === "string" ? src : "";
+                                return (
+                                    <span className="block my-6">
+                                        <Image
+                                            src={imageSrc}
+                                            alt={alt || ""}
+                                            width={800}
+                                            height={600}
+                                            className="w-full rounded"
+                                            style={{ height: "auto" }}
+                                        />
+                                    </span>
+                                );
+                            },
                         }}
                     >
                         {project.content}

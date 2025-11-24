@@ -132,10 +132,10 @@ export default function ProjectFilterMobile({
     return (
         <div className="relative overflow-hidden -mx-6">
             {/* Left fade gradient */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#f4f3ee] to-transparent pointer-events-none z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-[#f4f3ee] to-transparent pointer-events-none z-10" />
 
             {/* Right fade gradient */}
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#f4f3ee] to-transparent pointer-events-none z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-[#f4f3ee] to-transparent pointer-events-none z-10" />
 
             {/* Scrollable tags */}
             <div
