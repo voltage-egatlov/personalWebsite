@@ -1,10 +1,112 @@
-export default function Projects() {
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] p-4 sm:p-6 md:p-8">
-            <main className="w-full max-w-4xl">
-                <h1 className="text-4xl font-serif mb-8">Projects</h1>
-                <p className="text-lg font-serif">Coming soon...</p>
+"use client";
+
+import { useState, useEffect } from "react";
+import ProjectFilter from "@/components/projects/ProjectFilter";
+import ProjectListItem from "@/components/projects/ProjectListItem";
+import { ProjectListItem as ProjectListItemType } from "@/lib/projects/types";
+
+export default function ProjectsPage() {
+    const [projects, setProjects] = useState<ProjectListItemType[]>([]);
+    const [tags, setTags] = useState<string[]>([]);
+    const [activeTag, setActiveTag] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("/api/projects")
+            .then((res) => res.json())
+            .then((data) => {
+                setProjects(data.projects);
+                setTags(data.tags);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error loading projects:", error);
+                setLoading(false);
+            });
+    }, []);
+
+    const filteredProjects = activeTag
+        ? projects.filter((project) => project.tags.includes(activeTag))
+        : projects;
+
+    if (loading) {
+        return (
+            <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
+                <div className="text-[1.5vw] text-black">
+                    Loading projects...
+                </div>
             </main>
-        </div>
+        );
+    }
+
+    return (
+        <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center font-sans">
+            <div className="w-[50vw] min-w-[600px] max-w-[800px]">
+                {/* Header */}
+                <header className="mb-4">
+                    <h1 className="text-[3vw] text-black">Projects</h1>
+                </header>
+
+                {/* Filter */}
+                <div className="mb-4">
+                    <ProjectFilter
+                        tags={tags}
+                        activeTag={activeTag}
+                        onFilterChange={setActiveTag}
+                    />
+                </div>
+
+                {/* Projects List */}
+                <div className="space-y-0">
+                    {filteredProjects.length > 0 ? (
+                        filteredProjects.map((project, index) => (
+                            <div key={project.slug}>
+                                <ProjectListItem project={project} />
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center py-20">
+                            <p className="text-[1.5vw] text-black">
+                                No projects found in this category.
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <style jsx global>{`
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                @keyframes marquee {
+                    0% {
+                        transform: translateX(0);
+                    }
+                    100% {
+                        transform: translateX(-50%);
+                    }
+                }
+
+                .animate-marquee {
+                    animation: marquee 15s linear infinite;
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    * {
+                        animation-duration: 0.01ms !important;
+                        animation-iteration-count: 1 !important;
+                        transition-duration: 0.01ms !important;
+                    }
+                }
+            `}</style>
+        </main>
     );
 }
