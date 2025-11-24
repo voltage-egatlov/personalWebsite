@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import ProjectFilter from "@/components/projects/ProjectFilter";
+import ProjectFilterMobile from "@/components/projects/ProjectFilterMobile";
 import ProjectListItem from "@/components/projects/ProjectListItem";
+import ProjectListItemMobile from "@/components/projects/ProjectListItemMobile";
 import { ProjectListItem as ProjectListItemType } from "@/lib/projects/types";
 
 export default function ProjectsPage() {
@@ -11,6 +13,9 @@ export default function ProjectsPage() {
     const [tags, setTags] = useState<string[]>([]);
     const [activeTag, setActiveTag] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         fetch("/api/projects")
@@ -26,9 +31,35 @@ export default function ProjectsPage() {
             });
     }, []);
 
+    // Detect mobile breakpoint
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
     const filteredProjects = activeTag
         ? projects.filter((project) => project.tags.includes(activeTag))
         : projects;
+
+    // Check if projects list is scrollable
+    useEffect(() => {
+        const checkScrollable = () => {
+            if (scrollContainerRef.current) {
+                const { scrollHeight, clientHeight } =
+                    scrollContainerRef.current;
+                setIsScrollable(scrollHeight > clientHeight);
+            }
+        };
+
+        checkScrollable();
+        window.addEventListener("resize", checkScrollable);
+        return () => window.removeEventListener("resize", checkScrollable);
+    }, [filteredProjects, isMobile]);
 
     if (loading) {
         return (
@@ -41,47 +72,96 @@ export default function ProjectsPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] font-sans py-12 relative">
+        <main
+            className={`min-h-screen font-sans relative ${
+                isMobile
+                    ? "bg-[#f4f3ee] py-6 overflow-x-hidden"
+                    : "bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] py-12"
+            }`}
+        >
             {/* Business card - bottom right of page */}
             <Link
                 href="/"
-                className="fixed bottom-8 right-8 bg-gradient-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 hover:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black text-xl"
-                style={{ width: "120px", height: "68px" }}
+                className={`fixed bg-gradient-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 active:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black ${
+                    isMobile
+                        ? "bottom-4 right-4 text-base"
+                        : "bottom-8 right-8 text-xl"
+                }`}
+                style={
+                    isMobile
+                        ? { width: "80px", height: "46px" }
+                        : { width: "120px", height: "68px" }
+                }
                 aria-label="Back to home"
             >
                 TC
             </Link>
 
-            <div className="w-[50vw] min-w-[600px] max-w-[800px] mx-auto">
+            <div
+                className={`mx-auto ${
+                    isMobile
+                        ? "w-full px-6"
+                        : "w-[50vw] min-w-[600px] max-w-[800px]"
+                }`}
+            >
                 {/* Header - Fixed */}
                 <header className="mb-4">
-                    <h1 className="text-[3vw] text-black">Projects</h1>
+                    <h1
+                        className={`text-black ${
+                            isMobile ? "text-4xl" : "text-[3vw]"
+                        }`}
+                    >
+                        Projects
+                    </h1>
                 </header>
 
                 {/* Filter - Fixed */}
                 <div className="mb-4">
-                    <ProjectFilter
-                        tags={tags}
-                        activeTag={activeTag}
-                        onFilterChange={setActiveTag}
-                    />
+                    {isMobile ? (
+                        <ProjectFilterMobile
+                            tags={tags}
+                            activeTag={activeTag}
+                            onFilterChange={setActiveTag}
+                        />
+                    ) : (
+                        <ProjectFilter
+                            tags={tags}
+                            activeTag={activeTag}
+                            onFilterChange={setActiveTag}
+                        />
+                    )}
                 </div>
 
                 {/* Projects List - Only this section changes */}
-                <div className="space-y-0 min-h-[400px]">
-                    {filteredProjects.length > 0 ? (
-                        filteredProjects.map((project) => (
-                            <div key={project.slug}>
-                                <ProjectListItem project={project} />
+                <div className={`space-y-0 ${isMobile ? "relative" : ""}`}>
+                    <div
+                        ref={scrollContainerRef}
+                        className={`space-y-0 ${
+                            isMobile
+                                ? "max-h-[75vh] overflow-y-auto scrollbar-visible"
+                                : "min-h-[400px]"
+                        }`}
+                    >
+                        {filteredProjects.length > 0 ? (
+                            filteredProjects.map((project) => (
+                                <div key={project.slug}>
+                                    {isMobile ? (
+                                        <ProjectListItemMobile
+                                            project={project}
+                                        />
+                                    ) : (
+                                        <ProjectListItem project={project} />
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-20">
+                                <p className="text-[1.5vw] text-black">
+                                    No projects found in this category.
+                                </p>
                             </div>
-                        ))
-                    ) : (
-                        <div className="text-center py-20">
-                            <p className="text-[1.5vw] text-black">
-                                No projects found in this category.
-                            </p>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -114,6 +194,23 @@ export default function ProjectsPage() {
 
                 .group:hover .animate-marquee {
                     animation: marquee 12s linear infinite;
+                }
+
+                .scrollbar-visible::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .scrollbar-visible::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                .scrollbar-visible::-webkit-scrollbar-thumb {
+                    background: rgba(0, 0, 0, 0.2);
+                    border-radius: 3px;
+                }
+
+                .scrollbar-visible::-webkit-scrollbar-thumb:hover {
+                    background: rgba(0, 0, 0, 0.3);
                 }
 
                 @media (prefers-reduced-motion: reduce) {
