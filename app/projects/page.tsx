@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import ProjectFilter from "@/components/projects/ProjectFilter";
 import ProjectListItem from "@/components/projects/ProjectListItem";
 import { ProjectListItem as ProjectListItemType } from "@/lib/projects/types";
@@ -40,7 +41,17 @@ export default function ProjectsPage() {
     }
 
     return (
-        <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] font-sans py-36">
+        <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] font-sans py-12 relative">
+            {/* Business card - bottom right of page */}
+            <Link
+                href="/"
+                className="fixed bottom-8 right-8 bg-gradient-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 hover:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black text-xl"
+                style={{ width: "120px", height: "68px" }}
+                aria-label="Back to home"
+            >
+                TC
+            </Link>
+
             <div className="w-[50vw] min-w-[600px] max-w-[800px] mx-auto">
                 {/* Header - Fixed */}
                 <header className="mb-4">
