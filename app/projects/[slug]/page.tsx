@@ -28,7 +28,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     });
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] py-20">
+        <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] py-20">
             <article className="max-w-[700px] mx-auto px-8">
                 {/* Breadcrumb */}
                 <nav className="mb-12">

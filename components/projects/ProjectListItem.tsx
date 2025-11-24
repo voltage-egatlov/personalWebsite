@@ -18,7 +18,7 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
         >
             <div className="flex items-center gap-6">
                 {/* Title */}
-                <div className="w-[20%] flex-shrink-0">
+                <div className="w-[20%] shrink-0">
                     <h2 className="text-[1.1vw] font-medium text-black truncate">
                         {project.title}
                     </h2>
@@ -39,7 +39,7 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
                 </div>
 
                 {/* Date */}
-                <div className="text-[0.9vw] text-black/50 font-mono w-[60px] text-right flex-shrink-0">
+                <div className="text-[0.9vw] text-black/50 font-mono w-[60px] text-right shrink-0">
                     {year}
                 </div>
             </div>

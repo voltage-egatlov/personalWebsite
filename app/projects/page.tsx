@@ -31,7 +31,7 @@ export default function ProjectsPage() {
 
     if (loading) {
         return (
-            <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
+            <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center">
                 <div className="text-[1.5vw] text-black">
                     Loading projects...
                 </div>
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center font-sans">
+        <main className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] flex items-center justify-center font-sans">
             <div className="w-[50vw] min-w-[600px] max-w-[800px]">
                 {/* Header */}
                 <header className="mb-4">
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
                 {/* Projects List */}
                 <div className="space-y-0">
                     {filteredProjects.length > 0 ? (
-                        filteredProjects.map((project, index) => (
+                        filteredProjects.map((project) => (
                             <div key={project.slug}>
                                 <ProjectListItem project={project} />
                             </div>
