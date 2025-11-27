@@ -15,8 +15,19 @@ export default function ProjectFilterMobile({
 }: ProjectFilterMobileProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [centerTag, setCenterTag] = useState<string | null>(null);
+    const [showHint, setShowHint] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     const allTags = ["All Projects", ...tags];
+
+    // Check localStorage after component mounts (client-side only)
+    useEffect(() => {
+        setMounted(true);
+        const hasSeenHint = localStorage.getItem("projectsFilterHintShown");
+        if (!hasSeenHint) {
+            setShowHint(true);
+        }
+    }, []);
 
     // Detect which tag is in the center
     const handleScroll = useCallback(() => {
@@ -120,6 +131,12 @@ export default function ProjectFilterMobile({
             handleScroll();
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(snapToCenter, 150);
+
+            // Hide hint on first interaction
+            if (showHint) {
+                setShowHint(false);
+                localStorage.setItem("projectsFilterHintShown", "true");
+            }
         };
 
         container.addEventListener("scroll", onScroll);
@@ -127,10 +144,19 @@ export default function ProjectFilterMobile({
             container.removeEventListener("scroll", onScroll);
             clearTimeout(scrollTimeout);
         };
-    }, [handleScroll, snapToCenter]);
+    }, [handleScroll, snapToCenter, showHint]);
 
     return (
         <div className="relative overflow-hidden -mx-6">
+            {/* Swipe hint toast */}
+            {showHint && (
+                <div className="absolute top-1/2 left-6 -translate-y-1/2 z-20 animate-fadeIn">
+                    <div className="bg-[#f4f3ee] text-black px-3 py-1.5 rounded-full text-xs whitespace-nowrap border border-black/20">
+                        Swipe to explore →
+                    </div>
+                </div>
+            )}
+
             {/* Left fade gradient */}
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-[#f4f3ee] to-transparent pointer-events-none z-10" />
 
@@ -181,6 +207,19 @@ export default function ProjectFilterMobile({
                 .scrollbar-hide {
                     -ms-overflow-style: none;
                     scrollbar-width: none;
+                }
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.95);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate(-50%, -50%) scale(1);
+                    }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.3s ease-out;
                 }
             `}</style>
         </div>
