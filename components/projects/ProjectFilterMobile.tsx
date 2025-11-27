@@ -14,18 +14,21 @@ export default function ProjectFilterMobile({
     onFilterChange,
 }: ProjectFilterMobileProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const hasCheckedHint = useRef(false);
     const [centerTag, setCenterTag] = useState<string | null>(null);
     const [showHint, setShowHint] = useState(false);
-    const [mounted, setMounted] = useState(false);
 
     const allTags = ["All Projects", ...tags];
 
     // Check localStorage after component mounts (client-side only)
     useEffect(() => {
-        setMounted(true);
-        const hasSeenHint = localStorage.getItem("projectsFilterHintShown");
-        if (!hasSeenHint) {
-            setShowHint(true);
+        if (!hasCheckedHint.current) {
+            hasCheckedHint.current = true;
+            const hasSeenHint = localStorage.getItem("projectsFilterHintShown");
+            if (!hasSeenHint) {
+                // Use queueMicrotask to avoid synchronous setState in effect
+                queueMicrotask(() => setShowHint(true));
+            }
         }
     }, []);
 
