@@ -1,78 +1,35 @@
 ---
 title: "Personal Website"
 slug: "personal-website"
-date: "2024-11-16"
-tags: ["Coding", "Web Design"]
-description: "A premium portfolio site featuring realistic cardstock texture rendering with Next.js 16"
+date: "2025-11-16"
+tags: ["Coding", "Design", "Web"]
+description: "A portfolio site featuring realistic cardstock texture rendering with Next.js 16"
 ---
 
-# Personal Website
+A portfolio site that demonstrates technical depth through visual craft. Built with Next.js 16, featuring a custom business card component with physically-accurate cardstock texture rendering using normal maps and real-time lighting calculations.
 
-A modern personal portfolio built with Next.js 16, featuring a business card component with realistic cardstock texture rendering that captures the premium aesthetic of the iconic American Psycho business card scene.
-
-## The Vision
-
-This project prioritizes visual quality and attention to detail over technical complexity for its own sake. The centerpiece is a business card that doesn't just display information—it recreates the tactile, physical presence of premium cardstock through canvas-based rendering and normal map lighting.
-
+**[View Live Site](https://tejchhabra.com)**, or **[View on GitHub](https://github.com/voltage-egatlov/personalWebsite)**
 ## Technical Implementation
 
-### Cardstock Texture System
+**Core Technologies:**
+- Next.js 16 (App Router) with React 19 Server Components
+- TypeScript (strict mode) with comprehensive type safety
+- Custom canvas-based rendering engine
+- Tailwind CSS v4 for styling system
 
-The heart of this project is a custom texture rendering library that uses normal maps and Lambertian lighting calculations to create realistic paper textures:
+**Key Technical Achievement:**
+Developed a modular texture rendering library that simulates realistic cardstock using computer graphics techniques typically found in game engines. The system decodes normal maps (RGB-encoded surface vectors) and applies Lambertian reflectance models per-pixel to generate dynamic, high-fidelity paper textures at runtime.
 
-- **Normal Map Rendering**: Each pixel encodes a 3D surface normal vector (stored as RGB values)
-- **Per-Pixel Lighting**: Calculates light reflection using the Lambertian reflectance model
-- **Dynamic Generation**: Textures are rendered at runtime, allowing for adjustable lighting and colors
-- **Performance Optimization**: Image caching and pre-computed light direction ensure smooth rendering
+**Engineering Highlights:**
+- Designed clean separation between rendering logic and component layer
+- Implemented performance optimizations (image caching, pre-computed light vectors)
+- Built fully type-safe API with pure functional lighting calculations
+- Documented architectural decisions for long-term maintainability
 
-### Architecture Highlights
-
-**Technology Stack:**
-- Next.js 16 with App Router
-- React 19 with Server Components
-- TypeScript with strict mode
-- Tailwind CSS v4
-- HTML5 Canvas API
-
-**Modular Design:**
-- Separated cardstock rendering into a reusable library (`lib/cardstock/`)
-- Type-safe interfaces throughout
-- Pure functions for lighting calculations
-- Comprehensive documentation in code
-
-### Visual Quality
-
-The aesthetic is carefully calibrated:
-- Bone white base color (`#F7F5F0`) instead of pure white
-- 85% ambient light + 15% diffuse light for subtle texture contrast
-- 45° light angle with moderate elevation
-- Canvas opacity at 95% for text legibility
-- Viewport-based text scaling for responsive hierarchy
-
-## Design Philosophy
-
-This project demonstrates several key principles:
-
-1. **Tactile Realism** - Digital elements should feel physical and premium
-2. **Subtle Sophistication** - Effects should enhance, not distract
-3. **Technical Craftsmanship** - Clean, maintainable code with thorough documentation
-4. **Performance** - Optimized rendering without sacrificing visual quality
-
-## Results
-
-The final product achieves:
-- Realistic cardstock appearance that rivals physical business cards
-- Fast loading times with image caching
-- Maintainable codebase with modular architecture
-- Smooth animations with reduced-motion support
-- Type-safe implementation throughout
-
-## What I Learned
-
-This project reinforced the importance of:
-- Prioritizing user experience over technical complexity
-- Documenting architectural decisions for future maintenance
-- Balancing performance with visual quality
-- Creating reusable, well-tested libraries
-
-The cardstock rendering system could easily be extracted and used in other projects requiring realistic paper textures, demonstrating the value of modular design.
+## Skills
+- **Frontend Architecture**: Modern React patterns, Server Components, modular library design
+- **Computer Graphics**: Normal mapping, lighting models, canvas rendering optimization
+- **TypeScript Expertise**: Advanced type systems, strict mode compliance
+- **Performance Engineering**: Caching strategies, runtime optimization
+- **Visual Design**: Attention to detail, color theory, responsive scaling
+- **Documentation**: Comprehensive technical documentation and decision logs
