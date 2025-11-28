@@ -75,7 +75,7 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                 <nav className="mb-2">
                     <Link
                         href="/projects"
-                        className={`text-black relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                        className={`text-black link-animated ${
                             isMobile ? "text-sm" : "text-[1vw]"
                         }`}
                     >
@@ -164,10 +164,10 @@ export default function ProjectContent({ project }: ProjectContentProps) {
 
                                 return (
                                     <p
-                                        className={`text-black leading-relaxed mb-6 ${
+                                        className={`mb-6 ${
                                             isMobile
-                                                ? "text-base"
-                                                : "text-[1.1vw]"
+                                                ? "text-base text-black leading-relaxed"
+                                                : "text-body"
                                         }`}
                                     >
                                         {children}
@@ -176,8 +176,10 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                             },
                             ul: ({ children }) => (
                                 <ul
-                                    className={`text-black leading-relaxed mb-6 ml-6 list-disc space-y-2 ${
-                                        isMobile ? "text-base" : "text-[1.1vw]"
+                                    className={`mb-6 ml-6 list-disc space-y-2 ${
+                                        isMobile
+                                            ? "text-base text-black leading-relaxed"
+                                            : "text-body"
                                     }`}
                                 >
                                     {children}
@@ -185,8 +187,10 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                             ),
                             ol: ({ children }) => (
                                 <ol
-                                    className={`text-black leading-relaxed mb-6 ml-6 list-decimal space-y-2 ${
-                                        isMobile ? "text-base" : "text-[1.1vw]"
+                                    className={`mb-6 ml-6 list-decimal space-y-2 ${
+                                        isMobile
+                                            ? "text-base text-black leading-relaxed"
+                                            : "text-body"
                                     }`}
                                 >
                                     {children}
@@ -210,7 +214,7 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                             a: ({ href, children }) => (
                                 <a
                                     href={href}
-                                    className="text-black relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                                    className="text-black link-animated"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -237,8 +241,10 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                             ),
                             blockquote: ({ children }) => (
                                 <blockquote
-                                    className={`border-l-2 border-black/30 pl-6 my-8 text-black italic ${
-                                        isMobile ? "text-base" : "text-[1.1vw]"
+                                    className={`border-l-2 border-black/30 pl-6 my-8 italic ${
+                                        isMobile
+                                            ? "text-base text-black"
+                                            : "text-body"
                                     }`}
                                 >
                                     {children}

@@ -27,9 +27,9 @@ export default function ProjectListItemMobile({
 
                 {/* Year and Tags */}
                 <div className="flex items-center gap-3 text-sm">
-                    <span className="text-black/50 font-mono">{year}</span>
+                    <span className="font-mono text-black/50">{year}</span>
                     <span className="text-black/40">·</span>
-                    <span className="text-black/60 tracking-wider uppercase italic">
+                    <span className="tracking-wider uppercase italic text-black/60">
                         {project.tags.join(" · ")}
                     </span>
                 </div>

@@ -3,38 +3,36 @@ export default function About() {
         <div className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] p-6 sm:p-12">
             <main className="max-w-4xl mx-auto py-12">
                 <section className="mb-8">
-                    <h1 className="text-[2.5vw] font-medium text-black mb-3">
-                        Hi, I'm Tej.
-                    </h1>
-                    <p className="text-[1.1vw] md:text-[1.1vw] text-black leading-relaxed">
+                    <h1 className="text-heading-large mb-3">Hi, I'm Tej.</h1>
+                    <p className="text-body">
                         I'm an Associate Consultant at Mars & Co., where I work
-                        on strategic consulting projects for major players
-                        across industries. I'm passionate about product
-                        engineering and design, especially in software.
+                        on strategic consulting projects for Fortune 500
+                        companies. I'm passionate about product engineering and
+                        design, especially in software, and how these
+                        disciplines integrate with data sciences and
+                        econometrics to drive business strategy.
                     </p>
                 </section>
 
                 <section className="mb-8 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                    <h2 className="text-[1.1vw] tracking-wide text-black/60">
-                        Experience
-                    </h2>
+                    <h2 className="text-section-title">Experience</h2>
 
                     <div className="space-y-3">
                         <div>
                             <div className="flex justify-between items-baseline mb-1">
-                                <h3 className="text-[1.1vw] font-medium text-black">
+                                <h3 className="text-heading-medium">
                                     Associate Consultant
                                 </h3>
-                                <span className="text-[0.95vw] text-black/50 font-mono">
+                                <span className="text-meta-mono">
                                     2025 – Present
                                 </span>
                             </div>
-                            <p className="text-[0.95vw] text-black/70">
+                            <p className="text-meta">
                                 <a
                                     href="https://www.marsandco.com/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                                    className="link-animated"
                                 >
                                     Mars & Co.
                                 </a>
@@ -44,19 +42,19 @@ export default function About() {
 
                         <div>
                             <div className="flex justify-between items-baseline mb-1">
-                                <h3 className="text-[1.1vw] font-medium text-black">
+                                <h3 className="text-heading-medium">
                                     Teacher Assistant
                                 </h3>
-                                <span className="text-[0.95vw] text-black/50 font-mono">
+                                <span className="text-meta-mono">
                                     2024 – 2025
                                 </span>
                             </div>
-                            <p className="text-[0.95vw] text-black/70">
+                            <p className="text-meta">
                                 <a
                                     href="https://www.tufts.edu/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                                    className="link-animated"
                                 >
                                     Tufts University
                                 </a>
@@ -66,20 +64,20 @@ export default function About() {
 
                         <div>
                             <div className="flex justify-between items-baseline mb-1">
-                                <h3 className="text-[1.1vw] font-medium text-black">
+                                <h3 className="text-heading-medium">
                                     Intern, Transformation Office & Sales
                                     Operations
                                 </h3>
-                                <span className="text-[0.95vw] text-black/50 font-mono">
+                                <span className="text-meta-mono">
                                     2023 – 2024
                                 </span>
                             </div>
-                            <p className="text-[0.95vw] text-black/70">
+                            <p className="text-meta">
                                 <a
                                     href="https://www.dynatrace.com/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                                    className="link-animated"
                                 >
                                     Dynatrace
                                 </a>
@@ -89,19 +87,17 @@ export default function About() {
 
                         <div>
                             <div className="flex justify-between items-baseline mb-1">
-                                <h3 className="text-[1.1vw] font-medium text-black">
+                                <h3 className="text-heading-medium">
                                     Digital Product Developer Intern
                                 </h3>
-                                <span className="text-[0.95vw] text-black/50 font-mono">
-                                    2022
-                                </span>
+                                <span className="text-meta-mono">2022</span>
                             </div>
-                            <p className="text-[0.95vw] text-black/70">
+                            <p className="text-meta">
                                 <a
                                     href="https://evolvtechnology.com/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                                    className="link-animated"
                                 >
                                     Evolv Technology
                                 </a>
@@ -112,16 +108,14 @@ export default function About() {
                 </section>
 
                 <section className="mb-8 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                    <h2 className="text-[1.1vw] tracking-wide text-black/60">
-                        Interests
-                    </h2>
-                    <p className="text-[1.1vw] text-black leading-relaxed">
+                    <h2 className="text-section-title">Interests</h2>
+                    <p className="text-body">
                         Music production (
                         <a
                             href="https://open.spotify.com/artist/4qdWbmMccvfpWfA46uu1El"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                            className="link-animated"
                         >
                             7ej
                         </a>
@@ -130,7 +124,7 @@ export default function About() {
                             href="https://bicyclecards.com/how-to-play/hearts/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                            className="link-animated"
                         >
                             Hearts
                         </a>
@@ -139,33 +133,27 @@ export default function About() {
                 </section>
 
                 <section className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                    <h2 className="text-[1.1vw] tracking-wide text-black/60">
-                        Skills
-                    </h2>
+                    <h2 className="text-section-title">Skills</h2>
                     <div className="space-y-2">
                         <div>
-                            <h3 className="text-[0.9vw] text-black/60 tracking-wider uppercase italic mb-0.5">
+                            <h3 className="text-subsection-title mb-0.5">
                                 Computer Languages
                             </h3>
-                            <p className="text-[1.1vw] text-black">
+                            <p className="text-body">
                                 STATA, R, JavaScript, Tailwind, TypeScript,
                                 HTML, Git, C++, Python
                             </p>
                         </div>
                         <div>
-                            <h3 className="text-[0.9vw] text-black/60 tracking-wider uppercase italic mb-0.5">
-                                IT
-                            </h3>
-                            <p className="text-[1.1vw] text-black">
+                            <h3 className="text-subsection-title mb-0.5">IT</h3>
+                            <p className="text-body">
                                 Office Package (Word, Excel, PowerPoint),
                                 Atlassian Suite, Salesforce
                             </p>
                         </div>
                         <div>
-                            <h3 className="text-[0.9vw] text-black/60 tracking-wider uppercase italic mb-0.5">
-                                EQ
-                            </h3>
-                            <p className="text-[1.1vw] text-black">
+                            <h3 className="text-subsection-title mb-0.5">EQ</h3>
+                            <p className="text-body">
                                 Executive Communication, Large Team Coordination
                             </p>
                         </div>

@@ -19,7 +19,7 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
             <div className="flex items-center gap-6">
                 {/* Title - shows full text */}
                 <div className="shrink-0">
-                    <h2 className="text-[1.1vw] font-medium text-black whitespace-nowrap">
+                    <h2 className="text-heading-medium whitespace-nowrap">
                         {project.title}
                     </h2>
                 </div>
@@ -27,22 +27,22 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
                 {/* Description - scrolls on hover, takes remaining space */}
                 <div className="flex-1 overflow-hidden relative min-w-0">
                     <div className="inline-block animate-marquee whitespace-nowrap">
-                        <span className="text-[0.95vw] text-black/70 inline-block pr-10">
+                        <span className="text-meta inline-block pr-10">
                             {project.description}
                         </span>
-                        <span className="text-[0.95vw] text-black/70 inline-block pr-10">
+                        <span className="text-meta inline-block pr-10">
                             {project.description}
                         </span>
                     </div>
                 </div>
 
                 {/* Tags */}
-                <div className="text-[0.85vw] text-black/60 tracking-wider uppercase whitespace-nowrap italic shrink-0">
+                <div className="text-subsection-title whitespace-nowrap shrink-0">
                     {project.tags.join(" · ")}
                 </div>
 
                 {/* Date */}
-                <div className="text-[0.9vw] text-black/50 font-mono w-[60px] text-right shrink-0">
+                <div className="text-meta-mono w-[60px] text-right shrink-0">
                     {year}
                 </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
     loadImageCached,
     renderCardstockTexture,
@@ -159,12 +159,6 @@ export default function BusinessCard({
     topRight,
 }: BusinessCardProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const router = useRouter();
-
-    const handleNavigation = (href: string) => (e: React.MouseEvent) => {
-        e.preventDefault();
-        router.push(href);
-    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -240,7 +234,7 @@ export default function BusinessCard({
                         href={companyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                        className="link-animated no-underline"
                         style={{ textDecoration: "none" }}
                     >
                         {company}
@@ -254,10 +248,7 @@ export default function BusinessCard({
                         fontSize: `max(14px, ${2.25 * textScaleFactor}cqw)`,
                     }}
                 >
-                    <a
-                        href={`mailto:${email}`}
-                        className="block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
-                    >
+                    <a href={`mailto:${email}`} className="block link-animated">
                         {email}
                     </a>
                     <p>{phone}</p>
@@ -270,23 +261,21 @@ export default function BusinessCard({
                         fontSize: `max(18px, ${4 * textScaleFactor}cqw)`,
                     }}
                 >
-                    <a
+                    <Link
                         href="/projects"
-                        onClick={handleNavigation("/projects")}
-                        className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                        className="link-animated no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         Projects
-                    </a>
+                    </Link>
                     <span className="mx-3">·</span>
-                    <a
+                    <Link
                         href="/about"
-                        onClick={handleNavigation("/about")}
-                        className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                        className="link-animated no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         About
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Desktop: Navigation links at bottom right */}
@@ -296,23 +285,21 @@ export default function BusinessCard({
                         fontSize: `max(14px, ${2.25 * textScaleFactor}cqw)`,
                     }}
                 >
-                    <a
+                    <Link
                         href="/projects"
-                        onClick={handleNavigation("/projects")}
-                        className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                        className="link-animated no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         Projects
-                    </a>
+                    </Link>
                     <br />
-                    <a
+                    <Link
                         href="/about"
-                        onClick={handleNavigation("/about")}
-                        className="relative inline-block no-underline after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0.5 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left cursor-pointer"
+                        className="link-animated no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         About
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Optional: Top left corner */}

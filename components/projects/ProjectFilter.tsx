@@ -15,7 +15,7 @@ export default function ProjectFilter({
 
     return (
         <nav className="">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[1.1vw] tracking-wide">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-section-title">
                 {allTags.map((tag, index) => {
                     const isActive =
                         tag === "All Projects"
