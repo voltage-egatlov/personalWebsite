@@ -14,23 +14,9 @@ export default function ProjectFilterMobile({
     onFilterChange,
 }: ProjectFilterMobileProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const hasCheckedHint = useRef(false);
     const [centerTag, setCenterTag] = useState<string | null>(null);
-    const [showHint, setShowHint] = useState(false);
 
     const allTags = ["All Projects", ...tags];
-
-    // Check localStorage after component mounts (client-side only)
-    useEffect(() => {
-        if (!hasCheckedHint.current) {
-            hasCheckedHint.current = true;
-            const hasSeenHint = localStorage.getItem("projectsFilterHintShown");
-            if (!hasSeenHint) {
-                // Use queueMicrotask to avoid synchronous setState in effect
-                queueMicrotask(() => setShowHint(true));
-            }
-        }
-    }, []);
 
     // Detect which tag is in the center
     const handleScroll = useCallback(() => {
@@ -134,12 +120,6 @@ export default function ProjectFilterMobile({
             handleScroll();
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(snapToCenter, 150);
-
-            // Hide hint on first interaction
-            if (showHint) {
-                setShowHint(false);
-                localStorage.setItem("projectsFilterHintShown", "true");
-            }
         };
 
         container.addEventListener("scroll", onScroll);
@@ -147,19 +127,10 @@ export default function ProjectFilterMobile({
             container.removeEventListener("scroll", onScroll);
             clearTimeout(scrollTimeout);
         };
-    }, [handleScroll, snapToCenter, showHint]);
+    }, [handleScroll, snapToCenter]);
 
     return (
         <div className="relative overflow-hidden -mx-6">
-            {/* Swipe hint toast */}
-            {showHint && (
-                <div className="absolute top-1/2 left-6 -translate-y-1/2 z-20 animate-fadeIn">
-                    <div className="bg-[#f4f3ee] text-black px-3 py-1.5 rounded-full text-xs whitespace-nowrap border border-black/20">
-                        Swipe to explore →
-                    </div>
-                </div>
-            )}
-
             {/* Left fade gradient */}
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-[#f4f3ee] to-transparent pointer-events-none z-10" />
 
@@ -182,12 +153,47 @@ export default function ProjectFilterMobile({
                     const tagValue = tag === "All Projects" ? null : tag;
                     const isActive = tagValue === activeTag;
 
+                    const handleClick = () => {
+                        if (!scrollRef.current) return;
+
+                        const container = scrollRef.current;
+                        const tagElement = container.querySelector(
+                            `[data-tag="${tag}"]`,
+                        );
+
+                        if (tagElement) {
+                            const elementRect =
+                                tagElement.getBoundingClientRect();
+                            const containerRect =
+                                container.getBoundingClientRect();
+                            const elementCenter =
+                                elementRect.left -
+                                containerRect.left +
+                                elementRect.width / 2;
+
+                            const scrollTarget =
+                                container.scrollLeft +
+                                elementCenter -
+                                container.offsetWidth / 2;
+
+                            container.scrollTo({
+                                left: scrollTarget,
+                                behavior: "smooth",
+                            });
+
+                            // Update the filter immediately
+                            setCenterTag(tag);
+                            onFilterChange(tagValue);
+                        }
+                    };
+
                     return (
                         <div
                             key={tag}
                             data-tag={tag}
-                            className="shrink-0 transition-opacity duration-300"
+                            className="shrink-0 transition-opacity duration-300 cursor-pointer"
                             style={{ scrollSnapAlign: "center" }}
+                            onClick={handleClick}
                         >
                             <span
                                 className={`text-lg whitespace-nowrap transition-all duration-300 ${
@@ -210,19 +216,6 @@ export default function ProjectFilterMobile({
                 .scrollbar-hide {
                     -ms-overflow-style: none;
                     scrollbar-width: none;
-                }
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translate(-50%, -50%) scale(0.95);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translate(-50%, -50%) scale(1);
-                    }
-                }
-                .animate-fadeIn {
-                    animation: fadeIn 0.3s ease-out;
                 }
             `}</style>
         </div>
