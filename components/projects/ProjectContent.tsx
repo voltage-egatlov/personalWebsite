@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Project } from "@/lib/projects/types";
@@ -115,6 +116,7 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                 {/* Content */}
                 <div className="prose prose-lg max-w-none">
                     <ReactMarkdown
+                        rehypePlugins={[rehypeRaw]}
                         components={{
                             h1: ({ children }) => (
                                 <h1
