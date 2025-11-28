@@ -15,12 +15,12 @@ export default function About() {
             <main className="max-w-4xl mx-auto py-6 md:py-12">
                 <section className="mb-6 md:mb-8">
                     <h1 className="text-3xl md:text-heading-large mb-3 font-medium text-black">
-                        Hi, I'm Tej.
+                        Hi, I&apos;m Tej.
                     </h1>
                     <p className="text-base md:text-body text-black leading-relaxed">
-                        I'm an Associate Consultant at Mars & Co., where I work
-                        on strategic consulting projects for major players
-                        across industries. I'm passionate about product
+                        I&apos;m an Associate Consultant at Mars & Co., where I
+                        work on strategic consulting projects for major players
+                        across industries. I&apos;m passionate about product
                         engineering and design, especially in software. Thanks
                         for visiting and be sure to check out my{" "}
                         <Link href="/projects" className="link-animated">
@@ -152,40 +152,6 @@ export default function About() {
                         </a>
                         .
                     </p>
-                </section>
-
-                <section className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-3 md:gap-4">
-                    <h2 className="text-base md:text-section-title tracking-wide text-black/60">
-                        Skills
-                    </h2>
-                    <div className="space-y-3 md:space-y-2">
-                        <div>
-                            <h3 className="text-sm md:text-subsection-title mb-1 md:mb-0.5 tracking-wider uppercase italic text-black/60">
-                                Computer Languages
-                            </h3>
-                            <p className="text-base md:text-body text-black leading-relaxed">
-                                STATA, R, JavaScript, Tailwind, TypeScript,
-                                HTML, Git, C++, Python
-                            </p>
-                        </div>
-                        <div>
-                            <h3 className="text-sm md:text-subsection-title mb-1 md:mb-0.5 tracking-wider uppercase italic text-black/60">
-                                IT
-                            </h3>
-                            <p className="text-base md:text-body text-black leading-relaxed">
-                                Office Package (Word, Excel, PowerPoint),
-                                Atlassian Suite, Salesforce
-                            </p>
-                        </div>
-                        <div>
-                            <h3 className="text-sm md:text-subsection-title mb-1 md:mb-0.5 tracking-wider uppercase italic text-black/60">
-                                EQ
-                            </h3>
-                            <p className="text-base md:text-body text-black leading-relaxed">
-                                Executive Communication, Large Team Coordination
-                            </p>
-                        </div>
-                    </div>
                 </section>
             </main>
         </div>
