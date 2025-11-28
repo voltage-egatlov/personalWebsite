@@ -5,6 +5,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { Project } from "@/lib/projects/types";
+import PDFViewer from "@/components/PDFViewer";
 
 interface ProjectContentProps {
     project: Project;
@@ -220,6 +221,20 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                             img: ({ src, alt }) => {
                                 const imageSrc =
                                     typeof src === "string" ? src : "";
+
+                                // Check if it's a PDF
+                                if (imageSrc.toLowerCase().endsWith(".pdf")) {
+                                    return (
+                                        <span className="block my-8">
+                                            <PDFViewer
+                                                file={imageSrc}
+                                                width={isMobile ? 350 : 700}
+                                                showControls={true}
+                                            />
+                                        </span>
+                                    );
+                                }
+
                                 return (
                                     <span className="block my-6">
                                         <Image
