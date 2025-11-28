@@ -4,8 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { Project } from "@/lib/projects/types";
-import PDFViewer from "@/components/PDFViewer";
+
+const PDFViewer = dynamic(() => import("@/components/PDFViewer"), {
+    ssr: false,
+    loading: () => (
+        <div className="text-sm text-gray-500">Loading PDF viewer...</div>
+    ),
+});
 
 interface ProjectContentProps {
     project: Project;
@@ -136,15 +143,37 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                                     {children}
                                 </h3>
                             ),
-                            p: ({ children }) => (
-                                <p
-                                    className={`text-black leading-relaxed mb-6 ${
-                                        isMobile ? "text-base" : "text-[1.1vw]"
-                                    }`}
-                                >
-                                    {children}
-                                </p>
-                            ),
+                            p: ({ children, node }) => {
+                                // Check if this paragraph contains only an image that's a PDF
+                                const hasOnlyPdfImage =
+                                    node?.children?.length === 1 &&
+                                    node.children[0].type === "element" &&
+                                    node.children[0].tagName === "img" &&
+                                    typeof node.children[0].properties?.src ===
+                                        "string" &&
+                                    node.children[0].properties.src
+                                        .toLowerCase()
+                                        .endsWith(".pdf");
+
+                                if (hasOnlyPdfImage) {
+                                    // Return a div instead of p for PDF embeds
+                                    return (
+                                        <div className="my-8">{children}</div>
+                                    );
+                                }
+
+                                return (
+                                    <p
+                                        className={`text-black leading-relaxed mb-6 ${
+                                            isMobile
+                                                ? "text-base"
+                                                : "text-[1.1vw]"
+                                        }`}
+                                    >
+                                        {children}
+                                    </p>
+                                );
+                            },
                             ul: ({ children }) => (
                                 <ul
                                     className={`text-black leading-relaxed mb-6 ml-6 list-disc space-y-2 ${
@@ -225,13 +254,13 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                                 // Check if it's a PDF
                                 if (imageSrc.toLowerCase().endsWith(".pdf")) {
                                     return (
-                                        <span className="block my-8">
+                                        <div className="w-full">
                                             <PDFViewer
                                                 file={imageSrc}
                                                 width={isMobile ? 350 : 700}
                                                 showControls={true}
                                             />
-                                        </span>
+                                        </div>
                                     );
                                 }
 

@@ -2,7 +2,7 @@
 title: "UGtoSpotify - Playlist Converter"
 slug: "ugtospotify"
 date: "2024-11-16"
-tags: ["Coding", "API Integration", "Web"]
+tags: ["Coding", "Web"]
 description: "A web app that converts Ultimate Guitar playlists to Spotify playlists using OAuth and serverless functions"
 ---
 

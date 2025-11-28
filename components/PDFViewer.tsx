@@ -2,91 +2,82 @@
 
 import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
 
 // Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface PDFViewerProps {
-  file: string;
-  className?: string;
-  width?: number;
-  showControls?: boolean;
+    file: string;
+    className?: string;
+    width?: number;
+    showControls?: boolean;
+    maxHeight?: number;
 }
 
 export default function PDFViewer({
-  file,
-  className = "",
-  width = 800,
-  showControls = true,
+    file,
+    className = "",
+    width = 800,
+    showControls = true,
+    maxHeight = 600,
 }: PDFViewerProps) {
-  const [numPages, setNumPages] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [numPages, setNumPages] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-    setNumPages(numPages);
-    setIsLoading(false);
-  }
+    function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+        setNumPages(numPages);
+        setIsLoading(false);
+    }
 
-  function changePage(offset: number) {
-    setPageNumber((prevPageNumber) => prevPageNumber + offset);
-  }
+    return (
+        <div className={`flex flex-col items-center gap-4 ${className}`}>
+            {isLoading && (
+                <div className="text-sm text-gray-500">Loading PDF...</div>
+            )}
 
-  function previousPage() {
-    changePage(-1);
-  }
+            <div
+                className="overflow-y-auto border border-gray-200 shadow-lg"
+                style={{ maxHeight: `${maxHeight}px` }}
+            >
+                <Document
+                    file={file}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    loading={
+                        <div className="text-sm text-gray-500 p-4">
+                            Loading document...
+                        </div>
+                    }
+                    error={
+                        <div className="text-sm text-red-500 p-4">
+                            Failed to load PDF
+                        </div>
+                    }
+                >
+                    {Array.from(new Array(numPages), (el, index) => (
+                        <Page
+                            key={`page_${index + 1}`}
+                            pageNumber={index + 1}
+                            width={width}
+                            loading={
+                                <div className="text-sm text-gray-500 p-4">
+                                    Loading page {index + 1}...
+                                </div>
+                            }
+                            renderTextLayer={true}
+                            renderAnnotationLayer={true}
+                            className="mb-2"
+                        />
+                    ))}
+                </Document>
+            </div>
 
-  function nextPage() {
-    changePage(1);
-  }
-
-  return (
-    <div className={`flex flex-col items-center gap-4 ${className}`}>
-      {isLoading && (
-        <div className="text-sm text-gray-500">Loading PDF...</div>
-      )}
-
-      <Document
-        file={file}
-        onLoadSuccess={onDocumentLoadSuccess}
-        loading={<div className="text-sm text-gray-500">Loading document...</div>}
-        error={<div className="text-sm text-red-500">Failed to load PDF</div>}
-        className="border border-gray-200 shadow-lg"
-      >
-        <Page
-          pageNumber={pageNumber}
-          width={width}
-          loading={<div className="text-sm text-gray-500">Loading page...</div>}
-          renderTextLayer={true}
-          renderAnnotationLayer={true}
-        />
-      </Document>
-
-      {showControls && numPages > 0 && (
-        <div className="flex items-center gap-4 text-sm">
-          <button
-            onClick={previousPage}
-            disabled={pageNumber <= 1}
-            className="px-4 py-2 bg-black text-white disabled:bg-gray-300 disabled:cursor-not-allowed rounded hover:bg-gray-800 transition-colors"
-          >
-            Previous
-          </button>
-
-          <p className="text-gray-700">
-            Page {pageNumber} of {numPages}
-          </p>
-
-          <button
-            onClick={nextPage}
-            disabled={pageNumber >= numPages}
-            className="px-4 py-2 bg-black text-white disabled:bg-gray-300 disabled:cursor-not-allowed rounded hover:bg-gray-800 transition-colors"
-          >
-            Next
-          </button>
+            {showControls && numPages > 0 && (
+                <div className="text-sm text-gray-700">
+                    {numPages} {numPages === 1 ? "page" : "pages"}
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
