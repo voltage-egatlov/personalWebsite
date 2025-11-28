@@ -288,18 +288,6 @@ export default function ProjectContent({ project }: ProjectContentProps) {
                         {project.content}
                     </ReactMarkdown>
                 </div>
-
-                {/* Footer Navigation */}
-                <footer className="mt-12 pt-6 border-t border-black/20">
-                    <Link
-                        href="/projects"
-                        className={`text-black relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-current after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
-                            isMobile ? "text-sm" : "text-[1vw]"
-                        }`}
-                    >
-                        ← Back to Projects
-                    </Link>
-                </footer>
             </article>
         </main>
     );

@@ -19,11 +19,14 @@ export default function About() {
                     </h1>
                     <p className="text-base md:text-body text-black leading-relaxed">
                         I'm an Associate Consultant at Mars & Co., where I work
-                        on strategic consulting projects for Fortune 500
-                        companies. I'm passionate about product engineering and
-                        design, especially in software, and how these
-                        disciplines integrate with data sciences and
-                        econometrics to drive business strategy.
+                        on strategic consulting projects for major players
+                        across industries. I'm passionate about product
+                        engineering and design, especially in software. Thanks
+                        for visiting and be sure to check out my{" "}
+                        <Link href="/projects" className="link-animated">
+                            projects
+                        </Link>
+                        !
                     </p>
                 </section>
 

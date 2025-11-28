@@ -234,7 +234,7 @@ export default function BusinessCard({
                         href={companyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link-animated no-underline"
+                        className="link-animated-underline no-underline"
                         style={{ textDecoration: "none" }}
                     >
                         {company}
@@ -248,7 +248,10 @@ export default function BusinessCard({
                         fontSize: `max(14px, ${2.25 * textScaleFactor}cqw)`,
                     }}
                 >
-                    <a href={`mailto:${email}`} className="block link-animated">
+                    <a
+                        href={`mailto:${email}`}
+                        className="block link-animated-underline"
+                    >
                         {email}
                     </a>
                     <p>{phone}</p>
@@ -263,7 +266,7 @@ export default function BusinessCard({
                 >
                     <Link
                         href="/projects"
-                        className="link-animated no-underline cursor-pointer"
+                        className="link-animated-underline no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         Projects
@@ -271,7 +274,7 @@ export default function BusinessCard({
                     <span className="mx-3">·</span>
                     <Link
                         href="/about"
-                        className="link-animated no-underline cursor-pointer"
+                        className="link-animated-underline no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         About
@@ -287,7 +290,7 @@ export default function BusinessCard({
                 >
                     <Link
                         href="/projects"
-                        className="link-animated no-underline cursor-pointer"
+                        className="link-animated-underline no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         Projects
@@ -295,7 +298,7 @@ export default function BusinessCard({
                     <br />
                     <Link
                         href="/about"
-                        className="link-animated no-underline cursor-pointer"
+                        className="link-animated-underline no-underline cursor-pointer"
                         style={{ textDecoration: "none" }}
                     >
                         About
