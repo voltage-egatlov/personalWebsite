@@ -1,6 +1,17 @@
+import Link from "next/link";
+
 export default function About() {
     return (
-        <div className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] p-6 sm:p-12">
+        <div className="min-h-screen bg-linear-to-br from-[#F7F5F0] to-[#e8e6e0] p-6 sm:p-12 relative">
+            {/* Business card - bottom right of page */}
+            <Link
+                href="/"
+                className="fixed bg-linear-to-br from-[#FAF6F0] to-[#F7F5F0] opacity-70 active:opacity-100 transition-opacity duration-300 z-50 shadow-md flex items-center justify-center font-serif text-black bottom-4 right-4 md:bottom-8 md:right-8 text-base md:text-xl w-20 h-[46px] md:w-[120px] md:h-[68px]"
+                aria-label="Back to home"
+            >
+                TC
+            </Link>
+
             <main className="max-w-4xl mx-auto py-12">
                 <section className="mb-8">
                     <h1 className="text-heading-large mb-3">Hi, I'm Tej.</h1>
