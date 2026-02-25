@@ -137,3 +137,29 @@ This is a personal portfolio site that demonstrates attention to detail through:
 4. **Performance** - Optimized rendering with caching and pre-computation
 
 The business card is the centerpiece and should always maintain its high-quality aesthetic.
+
+## Project Descriptions (`data/projects/`)
+
+Each project file is a markdown file with YAML frontmatter followed by a short description. When writing or editing project descriptions, follow these rules:
+
+### Voice & Tone
+- Casual, direct, with the occasional dry or ironic line — not flowery, not stiff
+- Declarative and matter-of-fact; not selling, just presenting
+- Impersonal (no "I built..." — prefer "Built to..." or "A tool that...")
+
+### Structure by Category
+
+**Coding projects** — motivation in one sentence, then a tight paragraph covering what it does technically and what makes it interesting. Preserve live site and GitHub links.
+
+**Engineering/Design projects** — lead with the problem being solved, then cover method and key findings in one paragraph. End with course name (and collaborators if any) as plain metadata below the paragraph. Preserve any PDF links.
+
+**Papers** — always lead with the research question explicitly stated. Front-load the most counterintuitive or significant finding. Mention collaborators if any. End with course name as metadata. Preserve any PDF links.
+
+**Creative projects** — one brief intro sentence covering the medium and tools used, then let the embeds speak for themselves. No skills lists, no process breakdowns.
+
+### Format Rules
+- One tight paragraph (or a few sentences) — no headers, no bullet lists, no "Key Findings" sections
+- Preserve all frontmatter (title, slug, date, tags, description) exactly as-is
+- Preserve all embedded iframes, PDF links, and live site/GitHub links
+- Tags stay as frontmatter, not in the prose
+- Collaborators mentioned naturally in the text where relevant
