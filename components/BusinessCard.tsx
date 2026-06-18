@@ -90,9 +90,15 @@ interface BusinessCardProps {
 
     /**
      * Company website URL
-     * @default "https://www.marsandco.com/"
+     * @default "https://junoonwellness.com"
      */
     companyUrl?: string;
+
+    /**
+     * LinkedIn profile URL (bottom right contact block, clickable)
+     * @default "https://www.linkedin.com/in/tejchhabra"
+     */
+    linkedin?: string;
 
     /**
      * Optional text for top left corner
@@ -150,11 +156,12 @@ export default function BusinessCard({
     textScaleFactor = 1.3,
     className = "",
     name = "TEJ CHHABRA",
-    subtitle = "associate strategy consultant",
-    email = "contact@tejchhabra.com",
+    subtitle = "co-founder",
+    email = "tej.chhabra03@gmail.com",
     phone = "617 314 1535",
-    company = "Mars & Co .",
-    companyUrl = "https://www.marsandco.com/",
+    company = "Junoon Wellness",
+    companyUrl = "https://junoonwellness.com",
+    linkedin = "https://www.linkedin.com/in/tejchhabra",
     topLeft,
     topRight,
 }: BusinessCardProps) {
@@ -255,6 +262,15 @@ export default function BusinessCard({
                         {email}
                     </a>
                     <p>{phone}</p>
+                    <a
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block link-animated-underline no-underline"
+                        style={{ textDecoration: "none" }}
+                    >
+                        LinkedIn
+                    </a>
                 </div>
 
                 {/* Mobile: Navigation links centered at bottom */}
