@@ -1,0 +1,55 @@
+{
+    "businessCard": {
+        "name": "TEJ CHHABRA",
+        "subtitle": "Associate Consultant",
+        "email": "tej.chhabra03@gmail.com",
+        "phone": "617 314 1535",
+        "company": "Bain & Co.",
+        "companyUrl": "https://www.bain.com/",
+        "linkedin": "https://www.linkedin.com/in/tejchhabra"
+    },
+    "experience": [
+        {
+            "title": "Associate Consultant, TIG (Private Equity Group)",
+            "org": "Bain & Co.",
+            "orgUrl": "https://www.bain.com/",
+            "location": "New York NY",
+            "dateLabel": "2026 – Present"
+        },
+        {
+            "title": "Co-founder → Advisor",
+            "org": "Junoon Wellness",
+            "orgUrl": "https://junoonwellness.com",
+            "location": "",
+            "dateLabel": "2026 – Present"
+        },
+        {
+            "title": "Associate Consultant",
+            "org": "Mars & Co.",
+            "orgUrl": "https://www.marsandco.com/",
+            "location": "New York NY",
+            "dateLabel": "2025 – 2026"
+        },
+        {
+            "title": "Teacher Assistant",
+            "org": "Tufts University",
+            "orgUrl": "https://www.tufts.edu/",
+            "location": "Somerville MA",
+            "dateLabel": "2024 – 2025"
+        },
+        {
+            "title": "Intern, Transformation Office & Sales Operations",
+            "org": "Dynatrace",
+            "orgUrl": "https://www.dynatrace.com/",
+            "location": "Waltham MA",
+            "dateLabel": "2023 – 2024"
+        },
+        {
+            "title": "Digital Product Developer Intern",
+            "org": "Evolv Technology",
+            "orgUrl": "https://evolvtechnology.com/",
+            "location": "Waltham MA",
+            "dateLabel": "2022"
+        }
+    ]
+}

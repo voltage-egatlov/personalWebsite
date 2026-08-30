@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getSiteConfig } from "@/lib/siteConfig";
 
 export default function About() {
+    const { experience } = getSiteConfig();
+
     return (
         <div className="min-h-screen bg-[#f4f3ee] md:bg-linear-to-br md:from-[#F7F5F0] md:to-[#e8e6e0] p-6 md:p-12 relative">
             {/* Business card - bottom right of page */}
@@ -46,138 +49,29 @@ export default function About() {
                     </h2>
 
                     <div className="space-y-4 md:space-y-3">
-                        <div>
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                    Associate Consultant, TIG (Private Equity
-                                    Group)
-                                </h3>
-                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2026 – Present
-                                </span>
+                        {experience.map((entry) => (
+                            <div key={`${entry.org}-${entry.title}`}>
+                                <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
+                                    <h3 className="text-lg md:text-heading-medium font-medium text-black">
+                                        {entry.title}
+                                    </h3>
+                                    <span className="text-sm md:text-meta-mono font-mono text-black/50">
+                                        {entry.dateLabel}
+                                    </span>
+                                </div>
+                                <p className="text-sm md:text-meta text-black/70">
+                                    <a
+                                        href={entry.orgUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="link-animated"
+                                    >
+                                        {entry.org}
+                                    </a>
+                                    {entry.location ? `, ${entry.location}` : null}
+                                </p>
                             </div>
-                            <p className="text-sm md:text-meta text-black/70">
-                                <a
-                                    href="https://www.bain.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-animated"
-                                >
-                                    Bain & Co.
-                                </a>
-                                , New York NY
-                            </p>
-                        </div>
-
-                        <div>
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                    Advisor
-                                </h3>
-                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2026 – Present
-                                </span>
-                            </div>
-                            <p className="text-sm md:text-meta text-black/70">
-                                <a
-                                    href="https://junoonwellness.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-animated"
-                                >
-                                    Junoon Wellness
-                                </a>
-                            </p>
-                        </div>
-
-                        <div>
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                    Associate Consultant
-                                </h3>
-                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2025 – 2026
-                                </span>
-                            </div>
-                            <p className="text-sm md:text-meta text-black/70">
-                                <a
-                                    href="https://www.marsandco.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-animated"
-                                >
-                                    Mars & Co.
-                                </a>
-                                , New York NY
-                            </p>
-                        </div>
-
-                        <div>
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                    Teacher Assistant
-                                </h3>
-                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2024 – 2025
-                                </span>
-                            </div>
-                            <p className="text-sm md:text-meta text-black/70">
-                                <a
-                                    href="https://www.tufts.edu/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-animated"
-                                >
-                                    Tufts University
-                                </a>
-                                , Somerville MA
-                            </p>
-                        </div>
-
-                        <div>
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                    Intern, Transformation Office & Sales
-                                    Operations
-                                </h3>
-                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2023 – 2024
-                                </span>
-                            </div>
-                            <p className="text-sm md:text-meta text-black/70">
-                                <a
-                                    href="https://www.dynatrace.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-animated"
-                                >
-                                    Dynatrace
-                                </a>
-                                , Waltham MA
-                            </p>
-                        </div>
-
-                        <div>
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                    Digital Product Developer Intern
-                                </h3>
-                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2022
-                                </span>
-                            </div>
-                            <p className="text-sm md:text-meta text-black/70">
-                                <a
-                                    href="https://evolvtechnology.com/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-animated"
-                                >
-                                    Evolv Technology
-                                </a>
-                                , Waltham MA
-                            </p>
-                        </div>
+                        ))}
                     </div>
                 </section>
 

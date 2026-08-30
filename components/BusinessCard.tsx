@@ -66,31 +66,31 @@ interface BusinessCardProps {
 
     /**
      * Subtitle/job title (centered, below name)
-     * @default "ASSOCIATE STRATEGY CONSULTANT"
+     * @default "Associate Consultant"
      */
     subtitle?: string;
 
     /**
-     * Email address (bottom left, clickable)
-     * @default "contact@tejchhabra.com"
+     * Email address (top right, clickable)
+     * @default "tej.chhabra03@gmail.com"
      */
     email?: string;
 
     /**
-     * Phone number (bottom left)
+     * Phone number (top right)
      * @default "617 314 1535"
      */
     phone?: string;
 
     /**
-     * Company name (bottom right, clickable)
-     * @default "Mars & Co."
+     * Company name (top left, clickable)
+     * @default "Bain & Co."
      */
     company?: string;
 
     /**
      * Company website URL
-     * @default "https://junoonwellness.com"
+     * @default "https://www.bain.com/"
      */
     companyUrl?: string;
 
@@ -156,11 +156,11 @@ export default function BusinessCard({
     textScaleFactor = 1.3,
     className = "",
     name = "TEJ CHHABRA",
-    subtitle = "advisor",
+    subtitle = "Associate Consultant",
     email = "tej.chhabra03@gmail.com",
     phone = "617 314 1535",
-    company = "Junoon Wellness",
-    companyUrl = "https://junoonwellness.com",
+    company = "Bain & Co.",
+    companyUrl = "https://www.bain.com/",
     linkedin = "https://www.linkedin.com/in/tejchhabra",
     topLeft,
     topRight,
