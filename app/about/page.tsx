@@ -18,11 +18,21 @@ export default function About() {
                         Hi, I&apos;m Tej.
                     </h1>
                     <p className="text-base md:text-body text-black leading-relaxed">
-                        I&apos;m an Associate Consultant at Mars & Co., where I
-                        work on strategic consulting projects for major players
-                        across industries. I&apos;m passionate about product
-                        engineering and design, especially in software. Thanks
-                        for visiting and be sure to check out my{" "}
+                        I&apos;m an Associate Consultant at Bain & Co., working
+                        in the TIG practice within the Private Equity Group.
+                        Alongside that, I&apos;m an advisor
+                        to{" "}
+                        <a
+                            href="https://junoonwellness.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-animated"
+                        >
+                            Junoon Wellness
+                        </a>
+                        . I&apos;m passionate about product engineering and
+                        design, especially in software. Thanks for visiting
+                        and be sure to check out my{" "}
                         <Link href="/projects" className="link-animated">
                             projects
                         </Link>
@@ -39,10 +49,54 @@ export default function About() {
                         <div>
                             <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
                                 <h3 className="text-lg md:text-heading-medium font-medium text-black">
+                                    Associate Consultant, TIG (Private Equity
+                                    Group)
+                                </h3>
+                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
+                                    2026 – Present
+                                </span>
+                            </div>
+                            <p className="text-sm md:text-meta text-black/70">
+                                <a
+                                    href="https://www.bain.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="link-animated"
+                                >
+                                    Bain & Co.
+                                </a>
+                                , New York NY
+                            </p>
+                        </div>
+
+                        <div>
+                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
+                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
+                                    Advisor
+                                </h3>
+                                <span className="text-sm md:text-meta-mono font-mono text-black/50">
+                                    2026 – Present
+                                </span>
+                            </div>
+                            <p className="text-sm md:text-meta text-black/70">
+                                <a
+                                    href="https://junoonwellness.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="link-animated"
+                                >
+                                    Junoon Wellness
+                                </a>
+                            </p>
+                        </div>
+
+                        <div>
+                            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
+                                <h3 className="text-lg md:text-heading-medium font-medium text-black">
                                     Associate Consultant
                                 </h3>
                                 <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                    2025 – Present
+                                    2025 – 2026
                                 </span>
                             </div>
                             <p className="text-sm md:text-meta text-black/70">

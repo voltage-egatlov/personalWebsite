@@ -1,0 +1,11 @@
+---
+title: "Alex Photography Portfolio"
+slug: "alex-photography"
+date: "2026-08-18"
+tags: ["Coding"]
+description: "A custom Next.js portfolio site for a photographer friend, with an algorithm that auto-places the homepage caption to avoid clashing with the hero photo"
+---
+
+A photographer needs a portfolio that looks like a portfolio, not a template with their name swapped in — so this is a custom site built for Alex, a photographer, covering Home, Photo, Prints, and About sections all backed by Supabase (Postgres + Storage) rather than hardcoded, and managed through a passcode-gated `/admin` (uploading, reordering, deleting, and marking photos as the home hero; editing About's copy and contact details) rather than a full login system, since a single-person portfolio doesn't need one. The interesting piece is `caption-placement.ts`: the homepage renders a red name caption over whichever photo is marked as hero, and instead of pinning that caption to a fixed corner, the site works out which corner is actually safe to put it in. The hero photo displays with `object-fit: cover`, so what's visible is a crop of the source image centered on a focal point — and that crop is a different shape on a phone than on a desktop window, so a corner that's clash-free on desktop can land right on the subject once the mobile crop zooms in. The algorithm reproduces the browser's cover-and-object-position cropping math to compute the actually-visible region separately for a representative desktop and mobile aspect ratio, downsizes the source photo via `sharp` to an 80x80 grid, and scores each of the four candidate corners on WCAG-style contrast ratio against the caption's actual text color, a separate same-hue clash penalty (a red caption over red pants can pass a luminance contrast check and still be unreadable), and busyness via pixel-luminance variance (a flat sky scores near zero, a cluttered corner scores high) — picking whichever corner wins, with results cached per photo id and a safe fallback to a default corner if the fetch or decode ever fails.
+
+**[View Live Site](https://alexandranikita.com)**, or **[View on GitHub](https://github.com/voltage-egatlov/AlexPersonalWebsite)**

@@ -156,7 +156,7 @@ export default function BusinessCard({
     textScaleFactor = 1.3,
     className = "",
     name = "TEJ CHHABRA",
-    subtitle = "co-founder",
+    subtitle = "advisor",
     email = "tej.chhabra03@gmail.com",
     phone = "617 314 1535",
     company = "Junoon Wellness",
