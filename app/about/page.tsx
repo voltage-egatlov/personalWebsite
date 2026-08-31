@@ -48,30 +48,54 @@ export default function About() {
                         Experience
                     </h2>
 
-                    <div className="space-y-4 md:space-y-3">
-                        {experience.map((entry) => (
-                            <div key={`${entry.org}-${entry.title}`}>
-                                <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
-                                    <h3 className="text-lg md:text-heading-medium font-medium text-black">
-                                        {entry.title}
-                                    </h3>
-                                    <span className="text-sm md:text-meta-mono font-mono text-black/50">
-                                        {entry.dateLabel}
-                                    </span>
+                    <div className="space-y-5 md:space-y-4">
+                        {experience.map((group) => {
+                            const grouped = group.roles.length > 1;
+                            return (
+                                <div key={group.org}>
+                                    <p className="text-sm md:text-meta text-black/70 mb-1.5">
+                                        <a
+                                            href={group.orgUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="link-animated font-medium text-black"
+                                        >
+                                            {group.org}
+                                        </a>
+                                        {group.location ? `, ${group.location}` : null}
+                                    </p>
+
+                                    <div className={grouped ? "relative pl-4" : ""}>
+                                        {grouped && (
+                                            <span
+                                                aria-hidden
+                                                className="absolute left-[3px] top-2 bottom-2 border-l border-dashed border-black/25"
+                                            />
+                                        )}
+                                        <div className="space-y-2">
+                                            {group.roles.map((role) => (
+                                                <div key={role.title} className="relative">
+                                                    {grouped && (
+                                                        <span
+                                                            aria-hidden
+                                                            className="absolute -left-4 top-[9px] w-1.5 h-1.5 rounded-full bg-black/30"
+                                                        />
+                                                    )}
+                                                    <div className="flex flex-col md:flex-row md:justify-between md:items-baseline">
+                                                        <h3 className="text-lg md:text-heading-medium font-medium text-black">
+                                                            {role.title}
+                                                        </h3>
+                                                        <span className="text-sm md:text-meta-mono font-mono text-black/50">
+                                                            {role.dateLabel}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
-                                <p className="text-sm md:text-meta text-black/70">
-                                    <a
-                                        href={entry.orgUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="link-animated"
-                                    >
-                                        {entry.org}
-                                    </a>
-                                    {entry.location ? `, ${entry.location}` : null}
-                                </p>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
 
